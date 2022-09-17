@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="assignment.css" />
+    <script src="assignment.js"></script>
+  </head>
+  <body>
+    <div class="inp">
+      <label for="First Name"> Enter a First name-</label>
+      <input type="text" name="fname" onchange="fname()" id="fnm" /><br />
+
+      <label for="Last Name"> Enter a Last name-</label>
+      <input type="text" name="lname" onchange="lname()" id="lnm" /><br />
+
+      <label for="Email"> Enter Email-</label>
+      <input type="text" name="Email" onchange="email()" id="eml" /><br />
+
+      <label for="First Name"> Enter phone-</label>
+      <input type="text" name="pho" onchange="pho()" id="ph" /><br />
+
+      <button type="button" onclick="subme()">submit</button><br />
+      <button type="button" onclick="refme()">refresh</button>
+    </div>
+    <table id="tab">
+      <div>
+        <tr id="stl">
+          <th>Sl.NO</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+      </div>
+    </table>
+  </body>
+</html>

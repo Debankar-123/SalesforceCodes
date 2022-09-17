@@ -1,0 +1,19 @@
+div
+{
+ width: 300;
+ border: 1px solid black;
+ margin-top: 10px;
+ margin-left: 400px;
+ margin-right: 200px;
+ padding-left: 20px;
+ padding-right: 20px;
+ padding-top: 20px;
+ background-color: blueviolet;
+}
+.names{
+  background-color: aqua;
+}
+.citys{
+  background-color: darkgreen;
+  box-sizing: content-box;
+}

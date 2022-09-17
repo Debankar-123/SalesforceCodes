@@ -1,0 +1,10 @@
+<template>
+
+  <lightning-button label="show account details" variant="base" onclick={showDetailsofAccount}></lightning-button>
+    <template for:each={getaccDetails} for:item="acc">
+      <lightning-card key={acc.Name} icon-name="standard:account">
+        <p>{acc.Name}</p>
+      </lightning-card>
+    </template>
+    
+</template>

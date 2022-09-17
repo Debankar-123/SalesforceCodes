@@ -1,0 +1,36 @@
+<template>
+  <div>
+    <lightning-card title="Create ecords" icon-name="standard:lead" >
+      <lightning-layout>
+        <lightning-layout-item size="6" padding="arround-small">
+          <lightning-card title="new opportunity">
+            <lightning-input label="Enter name" onchange={handleName} value={name}></lightning-input>
+            
+             <lightning-input label="Enter order number" onchange={handleOrder} value={order}></lightning-input>
+                 <lightning-card>
+                  <template if:true={options}>
+                    <div class="slds-m-arround_medium">
+                      <lightning-combobox name="Stage"
+                                          label="Stage"
+                                          value={selectedValue}
+                                          placeholder="'select prospecting"
+                                          options={options}
+                                          onchange={handlechange}>
+                      </lightning-combobox>
+                    </div>
+                  </template>
+                 </lightning-card>
+
+                    <lightning-input label="Enter close date" type="date" onchange={handleDate}></lightning-input>
+                      <lightning-input label="Enter ammount " onchange={handleAmmount}></lightning-input>
+          </lightning-card>
+        </lightning-layout-item>
+      </lightning-layout>
+    </lightning-card>
+  </div>
+  <div>
+    <lightning-card>
+      <lightning-button label="Save" onclick={saveRecord}></lightning-button>
+    </lightning-card>
+  </div>
+</template>

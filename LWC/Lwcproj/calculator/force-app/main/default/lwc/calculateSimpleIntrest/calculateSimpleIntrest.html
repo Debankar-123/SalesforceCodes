@@ -1,0 +1,38 @@
+<template>
+  
+    <div>
+      <p><b><i><u>Calculator For Simple Intrest</u></i></b></p>
+      <lightning-input label="Enter principle amount"
+                        name="Pamount"
+                        variant="base"
+                        placeholder="principal ammount"
+                        value={principleAmount}
+                        onchange={methodOnChange}></lightning-input>
+     <lightning-input label="Enter tenure(month)"
+                        name="month"
+                        variant="base"
+                        placeholder="months"
+                        value={time}
+                        onchange={methodOnChange}></lightning-input>
+    <lightning-input label="enter rate of intrest"
+                        name="rate"
+                        variant="base"
+                        placeholder="rate"
+                        value={rateOfIntrest}
+                        onchange={methodOnChange}></lightning-input>
+    <lightning-input label="simple intrest is"
+                        name="int"
+                        variant="base"
+                        placeholder="Intrest is"
+                        value={SI}></lightning-input>
+    <lightning-button label="Calculate"
+                        variant="success"
+                        onclick={calculateIntrest}
+                        ></lightning-button>
+    <lightning-button label="clear All"
+                        variant="neutral"
+                        onclick={clear}
+                        ></lightning-button>
+                
+    </div>
+</template>

@@ -1,0 +1,25 @@
+<template>
+  <lightning-card title="contact all records" icon-name="standard:contact" footer="these are the all records">
+    <lightning-button label="search" variant="brand" onclick={contacts}> </lightning-button>
+    <div>
+      <template if:true={listofcontacts}>
+        <p> number of contact is:{sized}</p>
+          <template for:each={listofcontacts} for:item="contact" >
+            
+            <p key={contact.Id}>{contact.LastName}</p>
+          </template>       
+      </template>
+    </div>
+    <div>
+      <P>account details </P>
+      <template if:true={usingwire}>
+        <template for:each={usingwire} for:item="accounts">
+          <p key={accounts.Id}> {accounts.id},{accounts.name},{accounts.Email__c}</p>
+        </template>        
+      </template>
+    </div>
+  </lightning-card>
+  
+
+    
+</template>

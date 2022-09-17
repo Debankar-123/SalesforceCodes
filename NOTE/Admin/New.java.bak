@@ -1,0 +1,22 @@
+class New 
+{
+	public static void main(String[] args) 
+	{
+		int[] arr={11,23,65,23,76,92,14,0,37,18};
+
+		for(int i=0;i<arr.length-1;i++){
+		 for(int j=i+1;j>0;j--){
+			if(arr[j]<arr[j-1]){
+				int temp=0;
+				temp=arr[j];
+				arr[j]=arr[j-1];
+				arr[j-1]=temp;
+			}
+			else{
+				break;
+			}
+		 }
+		}
+		System.out.println(java.util.Arrays.toString(arr));
+	}
+}

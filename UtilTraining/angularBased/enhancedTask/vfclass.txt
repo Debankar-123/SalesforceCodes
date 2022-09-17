@@ -1,0 +1,27 @@
+public class FirstClass 
+{
+    @RemoteAction
+    public static Account getAccount(string AccountName)
+    {
+        return [select id,Name, Phone ,Industry from Account where Name =:AccountName];
+        
+    }
+    @RemoteAction
+    public static List<Contact> getContact(string accId)
+    {
+        return [select id,FirstName,LastName,Email,Phone from Contact where AccountId  =:accId];
+        
+    }
+    
+    @RemoteAction
+    public static List<Opportunity> getOpportunity(string accId)
+    {
+        return [select Id,Name,StageName from Opportunity where AccountId = :accId];
+    }
+    @RemoteAction
+    public static List<Case> getCase(string accId)
+    {
+        return [select Id,Origin,Priority,Status from Case where AccountId = :accId];
+    }
+
+}

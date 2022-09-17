@@ -1,0 +1,15 @@
+[
+ {"Message":"Number of pincode(s) found:2",
+  "Status":"Success",
+  "PostOffice":[
+                 {"Name":"Begumpet","Description":null,"BranchType":"Sub Post Office",
+                       "DeliveryStatus":"Delivery","Circle":"Andhra Pradesh","District":"Hyderabad","Division":"Secunderabad",
+                         "Region":"Hyderabad City","Block":"Secunderabad","State":"Telangana","Country":"India","Pincode":"500016"
+                   },
+                   {"Name":"Prakashamnagar","Description":null,"BranchType":"Sub Post Office",
+                         "DeliveryStatus":"Non-Delivery","Circle":"Andhra Pradesh","District":"Hyderabad","Division":"Secunderabad"
+                     ,"Region":"Hyderabad City","Block":"Secunderabad","State":"Telangana","Country":"India","Pincode":"500016"
+                   }
+               ]
+ }
+]

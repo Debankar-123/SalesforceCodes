@@ -1,0 +1,20 @@
+<template>
+  <lightning-card title="account Record" icon-name="standard:account">
+      <lightning-layout>
+          <lightning-card title="create new account">
+            <lightning-input label="Enter name" placeholder="type name" name="name" onchange={onchangename}></lightning-input>
+            <lightning-input label="Enter Department name" placeholder="type Department" name="dept" onchange={onchangeDept}></lightning-input>
+            <lightning-input label="Enter email" placeholder="type email" name="email" onchange={onchangeemail}></lightning-input>
+            <lightning-input label="Enter fax" placeholder="type fax" name="fax" onchange={onchangefax}></lightning-input>
+            <lightning-input label="Enter phone" placeholder="type phone num.." name="phone" onchange={onchangephone}></lightning-input>
+            <lightning-input label="Enter rating" placeholder="type rating" name="rating" onchange={onchangerating}></lightning-input>
+            <lightning-input label="Enter annual Revenue" placeholder="type annual revenue" name="aRev" onchange={onchangerevenue}></lightning-input>
+            <br/>
+            <lightning-button label="save record" variant="base" onclick={saverecord}></lightning-button>     
+
+          </lightning-card>
+      </lightning-layout>
+
+  </lightning-card>
+    
+</template>

@@ -1,0 +1,20 @@
+<template>
+  <div>
+    <p><i><u><b>This is the registration form enter your breif details here correctly................</b></u></i></p>
+    <lightning-input type="text" label="Enter first name" name="Fname" placeholder=" first name" required="true"></lightning-input>
+
+    <lightning-input  class="names" type="text" label="Enter last name" name="Lname" placeholder=" last name" ></lightning-input>
+    <lightning-input type="text" label="Enter Contact address" name="mailling address" ></lightning-input>
+    <lightning-input class="citys" type="text" label="Enter city name" name="CName" placeholder="City name" ></lightning-input>
+      <lightning-input type="Number" label="Enter age" name="age" min="20" max="70" placeholder="age" required="true"></lightning-input>
+      <lightning-input type="tel" label="Enter contact number" name="ContactNumber"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required="true"></lightning-input>
+      <lightning-input type="email" label="Enter email address" name="EmailAdd" max-length="40"></lightning-input>
+      <lightning-input type="password" label="Enter password" name="Pass" placeholder=" Enter password" required="true"></lightning-input>
+      <lightning-input type="password" label="Confirm password" name="Cpass" placeholder="Confirm password" required="true"></lightning-input>
+      <lightning-input type="checkbox" label=" this is Checkbox" name="cBox" checked="false"></lightning-input>
+      <lightning-input type="toggle" label=" send updates" name="toog" checked="True"></lightning-input>
+      <lightning-input type="URL" label="Enter Website " placeholder="Enter your website here" name="Web" required="True"></lightning-input>
+      <lightning-input type="date" label="Enter date-of-Birth" name="DOB" required="true"></lightning-input>
+  </div>
+    
+</template>

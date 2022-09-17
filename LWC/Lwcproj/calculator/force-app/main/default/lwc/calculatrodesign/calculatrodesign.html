@@ -1,0 +1,30 @@
+<template>
+  <div >
+    <lightning-input class="aj"  label="enter first number" 
+                      name="fname"
+                      value={firstNumber}
+                      onchange={handelOnChange}>
+                    </lightning-input>
+    <lightning-input  label="Enter second number" 
+                      name="snum"
+                      value={secondNumber}
+                      onchange={handelOnChange}></lightning-input>
+    <lightning-input  label="operation result" 
+                      name="result"
+                      value={operationResult}> </lightning-input>                    
+  
+    <lightning-button label="division" 
+                      variant="success"
+                      onclick={dodivision} ></lightning-button> 
+    <lightning-button label="modulous" 
+                      variant="success"
+                      onclick={domodulous} ></lightning-button>
+    <lightning-button label="multiplication" 
+                      variant="success"
+                      onclick={domultiplication} ></lightning-button> 
+    <lightning-button label="addition" 
+                      variant="success"
+                      onclick={doAddition} ></lightning-button> 
+  </div>
+  
+</template>

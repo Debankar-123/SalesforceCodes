@@ -1,0 +1,134 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" controller="FirstClass" >
+<html>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+   
+        <body style="margin:2%">
+            <div ng-app="myApp" ng-controller="myCtrl">
+                <div class="row">
+                    <div class="col-sm-9">
+                    	<input type="text" ng-model = "AccountName" class="form-control" /> 
+                	</div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                    	<button type="submit" ng-click = "getAccountDetail()" class="btn btn-primary" >Search</button>
+                	</div>
+                </div>
+                
+                <br/>
+                
+                <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">{{AccountRecord.Name}}</h4>
+                      <p class="card-text">{{AccountRecord.Id}}</p>
+                      <a href="#" class="card-link">{{AccountRecord.Industry}}</a>
+                      
+                    </div>
+                </div>
+                <div class="container">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link" ng-click="getContact()">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" ng-click="getOpportunity()">Opportunity</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" ng-click="getCase()">Cases</a>
+                    </li>
+                  </ul>
+                </div>
+               <table class="table table-dark table-hover">
+              	<tr ng-repeat="x in contactList">
+                	<th>{{ x.FirstName }}</th>
+               	    <th>{{ x.LastName }}</th>
+              	</tr>
+                <tr ng-repeat="x in opportunityList">
+               	 <th>{{ x.Name }}</th>
+               	 <th>{{ x.StageName }}</th>
+                </tr>
+                <tr ng-repeat="x in caseList">
+                 <th>{{ x.Origin }}</th>
+                 <th>{{ x.Priority }}</th>  
+                  <th></th>  
+               </tr>
+                    
+            </table>
+            </div>
+            
+            
+                
+  </body>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope){
+        
+        $scope.AccountName = '';
+        $scope.getAccountDetail = function(){
+            debugger ;
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.FirstClass.getAccount}',
+                $scope.AccountName, 
+                function(result, event){
+                    if (event.status) {
+                        // Get DOM IDs for HTML and Visualforce elements like this
+                        $scope.AccountRecord = result ;
+                        $scope.$apply();
+                    }
+                }, 
+                {escape: true}
+            );
+        }
+        $scope.getContact = function(){
+            debugger ;
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.FirstClass.getContact}',
+                $scope.AccountRecord.Id, 
+                function(result, event){
+                    if (event.status) {
+                        // Get DOM IDs for HTML and Visualforce elements like this
+                        $scope.contactList = result ;
+                        $scope.$apply();
+                    }
+                }, 
+                {escape: true}
+            );
+        }
+         $scope.getOpportunity = function(){
+            debugger ;
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.FirstClass.getOpportunity}',
+                $scope.AccountRecord.Id, 
+                function(result, event){
+                    if (event.status) {
+                        // Get DOM IDs for HTML and Visualforce elements like this
+                        $scope.opportunityList = result ;
+                        $scope.$apply();
+                    }
+                }, 
+                {escape: true}
+            );
+        }
+           $scope.getCase = function(){
+            debugger ;
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.FirstClass.getCase}',
+                $scope.AccountRecord.Id, 
+                function(result, event){
+                    if (event.status) {
+                        // Get DOM IDs for HTML and Visualforce elements like this
+                        $scope.caseList = result ;
+                        $scope.$apply();
+                    }
+                }, 
+                {escape: true}
+            );
+        }        
+        
+    });
+ </script>
+</html>
+</apex:page>

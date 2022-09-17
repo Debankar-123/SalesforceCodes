@@ -1,0 +1,18 @@
+<template>
+  <div>
+  <lightning-card title="Create contact record">
+    <lightning-input type="text" label="First name" onchange={fname} value={Fname}></lightning-input>
+    <lightning-input type="text" label="Last name" onchange={lname} value={Lname}></lightning-input>
+    <lightning-input class="eml" type="email" label="Email" onchange={Email} value={Emails}></lightning-input>
+    <lightning-input  class="ph" type="text"  maxlength="10" minlength="10" label="phone" onchange={pho} value={phone}></lightning-input>
+  
+
+    <lightning-button label="Submit" 
+                        name="submit"
+                        variant="success" onclick={subme}></lightning-button>
+
+
+  </lightning-card>
+</div>
+    
+</template>

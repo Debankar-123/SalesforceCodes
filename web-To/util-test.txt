@@ -1,0 +1,83 @@
+<template>
+  <div>
+  <lightning-card title="Create contact record">
+    <lightning-input type="text" label="First name" onchange={fname} value={Fname}></lightning-input>
+    <lightning-input type="text" label="Last name" onchange={lname} value={Lname}></lightning-input>
+    <lightning-input class="eml" type="text" label="Email" onchange={Email} value={Emails}></lightning-input>
+    <lightning-input  class="ph" type="text" label="phone" onchange={pho} value={phone}></lightning-input>
+    <lightning-combobox
+               name="progress"
+               label="Status"
+               value={value}
+               placeholder="Select country"
+               options={options}
+               onchange={handleChange} >
+   </lightning-combobox><br/><br/> 
+
+    <lightning-button label="Submit" 
+                        name="submit"
+                        variant="success" onclick={subme}></lightning-button>
+
+
+  </lightning-card>
+</div>
+    
+</template>
+======================================
+import { LightningElement } from 'lwc';
+import { createRecord } from 'lightning/uiRecordApi';
+//import conObject from '@salesforce/schema/Contact';
+//import conFirstName from '@salesforce/schema/Contact.FirstName';
+//import conLastName from '@salesforce/schema/Contact.LastName';
+//import conemail from '@salesforce/schema/Contact.Email';
+//import conphone from '@salesforce/schema/Contact.Phone';
+//import CON_NAME from '@salesforce/schema/Contact.Country__c';
+
+
+export default class Contact_Detail extends LightningElement {
+  Fname="";
+  Lname="";
+  Emails="";
+  phone="";
+  value="";
+  
+get options() {
+  return [
+           { label: 'India', value: 'India' },
+           { label: 'Usa', value: 'Usa' },
+           { label: 'Canada', value: 'Canada' },
+           { label: 'South africa', value: 'South africa' },
+           { label: 'Bangladesh', value: 'Bangladesh' },
+           
+         ];
+        }
+  fname(event){
+    this.Fname=event.target.value;
+  }
+  lname(event){
+    this.Lname=event.target.value;
+  }
+  Email(event){
+    this.Emails=event.target.value;
+  }
+  pho(event){
+    this.phone=event.target.value;
+  }
+  handleChange(event){
+    this.value = event.detail.value;
+  }
+  subme(event){
+    var fields = {'FirstName' : this.Fname, 'LastName' : this.Lname, '	Email' : this.Emails, 'Phone':this.phone};
+
+    var objRecordInput = {'apiName' : '	Contact', fields};
+
+        createRecord(objRecordInput).then(response => {
+         alert('Account created with Id: ' +response.id);
+        }).catch(error => {
+          console.log('Error is here');
+          
+        alert('Error: ' +JSON.stringify(error));
+  });
+  }
+  
+}

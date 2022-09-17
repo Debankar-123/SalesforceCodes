@@ -1,0 +1,78 @@
+Account Status pick list field Inprogress , Approved , Rejected 
+
+Default value is Inprogess 
+
+
+Close all cases on Account the Account is Approved or rejected 
+
+Set Case reason as Account Approved if Account status is set to Approved else Account rejected 
+
+ans--
+Trigger Tname on account(before update){
+	if(trigger.isBefore &trigger.isUpdate){
+	list<account> acclst=[select id,name,(select id,status,reason from cases) from account where id in:Trigger.newmap.keyset()];
+		for(account acc:acclst){
+		if(acc.staus=='approved' ||acc.status=='Rejected'){
+		for(case cs:acc.cases){
+		cs.status='close';
+		cs.reason='approved';
+}		
+}
+}
+update acclst;
+		}
+
+}
+=================================================
+Trigger Tname on account(before update){
+	if(trigger.isBefore &trigger.isUpdate){
+
+map<id,case> mapRec=new map<id,case>();
+for(case cs:[select id,accountid,status,origin from case where accountid in :trigger.newmap.keyset()]){
+	maprec.put(cs.accountid,cs);
+}
+
+for(account acc:trigger.new){
+if(acc.staus=='approved' ||acc.status=='Rejected'){
+mapRec.get(acc.id).status='close';
+mapRecc.get(acc.id).status.reason='approved';
+}
+}
+}
+update maprec.values();
+}
+============try in my org===============
+trigger changeCaseWhenaccountCold on Account (before update) {
+	if(trigger.isBefore &trigger.isUpdate){
+	map<id,case> mapRec=new map<id,case>();
+	for(case cs:[select id,accountid,status,origin from case where accountid in :trigger.newmap.keyset()]){
+	maprec.put(cs.accountid,cs);
+		}
+        for(account acc:trigger.new){
+		if(acc.rating=='cold' ){
+		mapRec.get(acc.id).status='escalated';
+		mapRec.get(acc.id).reason='Installation';
+}
+}
+        update mapRec.values();
+    }
+}
+
+======================================================
+a=[1,4,2,7,5,0]
+for(integer i=0;i<a.lingth;i++){
+	for(initger j=0;j<i.length;j++){
+	
+}
+}
+a=[1,4,2,7,5,0]
+integr lrg=-1;
+integer plr=-1;
+for(integer i=0;i<a.length;i++){
+plr=i;
+lrg=a[i];
+if(){
+
+}
+
+}

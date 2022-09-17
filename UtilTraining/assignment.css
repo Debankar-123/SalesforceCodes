@@ -1,0 +1,19 @@
+tr,
+td,
+th {
+  border: 1px solid black;
+}
+.inp {
+  border: 3px solid black;
+  width: 450px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-left: 400px;
+  padding-top: 3ch;
+  padding-left: 3ch;
+  padding-bottom: 3ch;
+  background-color: antiquewhite;
+}
+body {
+  background-color: rgb(220, 246, 237);
+}

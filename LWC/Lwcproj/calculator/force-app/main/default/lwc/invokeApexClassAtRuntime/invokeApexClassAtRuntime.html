@@ -1,0 +1,10 @@
+<template>
+  <lightning-input label="Enter search character" value={getdetails} onchange={onchangeHandle}>
+  </lightning-input>
+   <lightning-button label="search record" onclick={onclickHandle} variant="success"></lightning-button>
+   <template for:each={listcontact} for:item="con">
+     <li key={con.id} >
+          <p>{con.id}</p>
+    </li>
+   </template>
+</template>

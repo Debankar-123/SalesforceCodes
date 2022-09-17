@@ -1,0 +1,366 @@
+Workflow Rules:
+===============
+Workflow Rules are used to Automate Certain business processes inside the Organization.
+
+i.e. Instead of performing all the operations manually as part of the Organization policy, We can make certain operations automated with the help of "Workflow Rules".
+
+Each Workflow Rule should be associated with an "Object". But, an Object can have one or more Workflow Rules.
+
+Note:
+	1. We can Create max. of 500 Workflow Rules per an Object. In which 50
+		Rules can be in "Active" Status at a time per an object.
+		
+	2. We can Configure max. of 2,000 Workflow Rules inside the Organization.
+
+Note: Workflow Rules are always firing based on DML Events.
+
+Each Workflow Rule Contains 2 Parts as below.
+
+	1. Event / Evaluation Criteria:
+		Event is nothing but an Occassion / Situation, Which indicates, When the Workflow Rule should get fired.
+	
+		Salesforce provides the below 3 Events / Evaluation Criteria's for Workflow Rule.
+		
+			1. Created:
+				This event will fire the Workflow Rule, Once a New Record has been Created inside the Object. (After Insert)	
+			
+			2. Created, and EveryTime it is Edited:
+				This event will fire the Workflow Rule, Once a New Record has been Created. And Once an Existing Record has been Updated inside the object. (After Insert, After Update)			
+			
+			3. Created, and AnyTime it is Edited and Meeting Subsequent
+				Criteria:
+				This event will fire the Workflow Rule, Once a New Record has been Created inside the Object. And It will fire the Rule upon Updating the record, if the record meets the specified conditions.
+				
+	2. Actions:
+		Actions indicates the operations to be get performed, once the Workflow Rule has been fired. A Workflow Rule can fire one or more Actions.
+		
+		Salesforce provides the below 4 types of actions can be supported by Workflow Rule.
+		
+			1. Email Alerts:
+				By using this Action, we can Send an Email Notification to one or more users with a pre-existing email template.		
+			
+			2. Field Updates:
+				By using this Action, we can update a field value by assigning the New Value.
+				
+				Note: Each Field Update Action allows us to update only one
+					  field in the record. 
+					  
+					  To update multiple field values, we have to add multiple field update actions. Which increase the Complexity in the Application and will leads to the performance issues.
+				 
+			3. Assign a Task:
+				This Action is used to assign a Task record to the user with the required subject and description, which reminds the people with a pop-up alert / notification.			
+			
+			4. Send an Outbound Message:
+				By using this Action, we can send an XML-Based SOAP message to the External system, which can be used for Integration.
+					(SOAP ---> Simple Object Access Protocol)
+					(XML  ---> Extensible Markup Language)
+					
+Types of Workflow Rules:
+------------------------
+	Based on the Time on which the actions are getting fired, Workflow Rules has been categorized into 2 types.
+	
+		1. Immediate Action Workflow Rules:
+			In this approach, the Workflow Rule will fire the Actions immediately as soon as the Criteria has been met.	
+		
+		2. Time-Dependent Action Workflow Rules / Time Triggers:
+			In this approach, we can fire the Actions based on specific period.
+			Till the Schedule Time is up, the Actions will get resides inside the "Workflow Queue".			
+		Ex:			
+		Credit Card ----> ICICI Bank.
+			|
+			 ----> Bill Generation Date : 1st of the Month.
+				   Bill Due Date : 20th of the Month.
+			
+			(Once the Bill has been Generated)
+			1st of the Month ----> Immediately ---> Email, SMS.
+			
+			Reminders:
+				10 Days Before DueDate (10th) ----> Email, SMS.
+				5 Days Before DueDate (15th) ----> Email, SMS.
+				3 Days Before DueDate (17th) ----> Email, SMS.
+				2 Days Before DueDate (18th) ----> Email, SMS.
+				1 Days Before DueDate (19th) ----> Email, SMS.
+				0 Days Before DueDate (20th) ----> Email, SMS.
+				1 Days After DueDate (21th) ----> Block the Card.
+
+Navigation:
+-----------
+	Click on "Setup" menu.
+		1. Search for the option "Workflow Rules" in QuickFind box.
+		2. Goto the "Workflow Rules" Section.
+		3. Click on "New Rule" button, to Create New Workflow Rule.
+		
+Email Alert:
+============
+	By using this Action, we can Send Email Alerts to One / More Users with the required Subject and Content by using a Pre-Existing Email Template.
+	
+UseCase:
+========
+	Configure a Workflow Rule on Hiring Manager Object, to Notify the HR Person upon Creating a New HR Record inside the Object.
+	
+		Object Name : Hiring Manager Object
+		Event / Evaluation Criteria : Created.
+			Rule Conditions:
+					Hiring Manager:Email Address != Null
+		Action Type : Immediate Actions.
+			Action Name : Email Alert.
+				Recipient Type : Email Field.
+				
+		Pre-Requisite: We should have an Email Template with the required
+						Subject and Content.					
+		
+	Testing Process:
+	----------------
+		Click on "Hiring Managers" Tab.
+			1. Click on "New" button.
+			2. Enter the Details inside the Fields.
+			3. Click on "Save" button.
+			
+		Observation:
+			It will send the Email Notification to the Hiring Manager Email Address, along with a CC Copy to the CC Email Address.
+			
+UseCase:
+========
+	Configure a Workflow Rule on the Lead Object, to Notify the Lead Person upon Creating / Editing the Lead Record inside the Object.
+		
+		Object Name : Lead Object
+		Event / Evaluation Criteria : Created, and EveryTime it is Edited.
+			Rule Condition: 
+					Lead:Email != Null
+		Action Type :Immediate Action.
+			Action Name : Email Alert
+				Recipient Type : Email Field.
+				
+Assignments:
+============
+	1. Configure a Workflow Rule on the Case Object, to Notify the Case Owner
+		upon Creating a New High Priority Case Record inside the Object.
+		
+	2. Configure a Workflow Rule, to Notify the Contact Person, and Contact
+		Record Owner upon Creating a New Contact Record, who is associated with the Mailing City "Bangalore".
+		
+Time-Dependent Actions:
+=======================
+	Time Dependent Actions are used to fire the Actions based on the specified Time Period. 
+	
+	Time-Dependent Actions will get awaited inside the "Workflow Queue" till the schedule time is up. Once the Time it up, then it will fire the action and will remove the entry from the Queue autoamatically by default.
+	
+	We can add max. of 10 Time Triggers in a Workflow Rule. Each Time Trigger can have max. of 40 Time-Dependent Actions.
+	
+	Note:
+		While Adding the Time Trigger, we can specify the Time in terms of either "Days / Hours".
+		
+		We can fire the Time-Dependent Actions either "Before / After" the specified Time Period.
+		
+	Note:
+		We can add both "Immediate Actions and Time-Dependent Actions" in a single Workflow rule.
+		
+	Note: Time-Dependent Actions can't be applicable on the Workflow Criteria
+		  "Created, and EveryTime it is Edited".
+		  
+UseCase:
+========
+	Configure a Workflow Rule on Position Object, to Notify the Hiring Manager upon Assigning a New Position as below.
+	
+		1. Send an Immediate Email Alert, while Assigning New Position.
+		2. Send the Reminder Alerts to the HR Person as below.				
+			10 Days Before Position Milestone Date ----> Send a Email Alert
+			5 Days Before Position Milestone Date  ----> Send a Email Alert
+			3 Days Before Position Milestone Date  ----> Send a Email Alert
+			2 Days Before Position Milestone Date  ----> Send a Email Alert
+			1 Days Before Position Milestone Date  ----> Send a Email Alert
+			0 Days Before Position Milestone Date  ----> Send a Email Alert
+			1 Days After Position Milestone Date   ----> Close the Position.
+		  
+		Object Name : Position Object.
+		Event / Evaluation Criteria : Created.
+			Rule Conditions:
+					1. Position:HR Email ID != Null.
+					2. Position:Milestone Date != Null
+					3. Position:Position Status != 'Closed'
+			Action Type:
+				1. Immediate Actions:
+						Action Name: Email Alert 
+							(Send the Email to HR Person Immediately)
+							
+				2. Time-Dependent Actions / Time Triggers:
+						Action Name : Email Alerts, Field Update.
+						
+					10 Days Before Milestone Date ----> Send a Email Alert	
+					5 Days Before Milestone Date  ----> Send a Email Alert
+			        3 Days Before Milestone Date  ----> Send a Email Alert
+	                2 Days Before Milestone Date  ----> Send a Email Alert
+	                1 Days Before Milestone Date  ----> Send a Email Alert
+                    0 Days Before Milestone Date  ----> Send a Email Alert
+                    1 Days After Milestone Date   ----> Close the Position.
+								  
+Field Update Actions:
+=====================
+By using this Action, We can update the field values inside the records, by assigning the New values.
+
+Each Field Update Action allows us to update only One Field inside the record. To Update multiple fields in the record,we have to add multiple field update actions inside the Workflow Rule.
+
+Note: While updating more number of fields in the record, Workflow Rule will
+		increase the Complexity, and will leads to the performance issues.
+		To avoid this problem, we can perform Bulk Field Updates by using "Apex Triggers".
+
+Note: A Workflow Rule can have max. of 40 Immediate Actions.
+
+While Using "Field Update Actions", we have the below 2 Cases.
+
+	1. Simple Field Update:
+		In this approach, we can Create a Workflow Rule on an Object, and through the Workflow Rule, we can update the fields in the Same Object.
+	
+	2. Cross-Object Field Updates:
+		In this approach, we can Create a Workflow Rule on an Object, and through the Workflow Rule, we can Update the Fields in the Cross-Objects.
+		
+UseCase:
+========
+	Configure a Workflow Rule on "Account Object", to Synchronize the "Billing Address" details into the "Shipping Address" fields upon Creating / Updating, if the checkbox "Both Addresses Are Same" has been selected.
+	
+	Pre-Requisite: Create a CheckBox Datatype Field "Both Addresses Are Same".
+	
+	Object Name : Account Object
+	Event / Evaluation Criteria : Created, and EveryTime it is Edited.
+		Rule Condition:
+				1. Account:BillingCity != Null
+				2. Account:BillingState != Null
+				3. Account:BillingCountry != Null
+				4. Account:Both Addresses Are Same == TRUE
+				
+	Action Type : Immediate Action.
+		Action Name : Field Update
+			Source Field					Target Field
+			------------------------------------------------
+			Account:BillingStreet		---> Account:ShippingStreet 
+			Account:BillingCity         ---> Account:ShippingCity
+			Account:BillingState        ---> Account:ShippingState
+			Account:BillingCountry      ---> Account:ShippingCountry
+			Account:BillingPostalCode   ---> Account:ShippingPostalCode
+
+Cross-Object Field Updates:
+===========================
+	By using this Approach, we can Create a Workflow Rule on an Object, and through the Rule we can Update the fields inside an another Object.
+	
+	Note:
+		1. Cross-Object Field Updates allows us to update the Fields between
+			the "Master-Detail" Related Objects.
+			
+		2. We can Update the fields from "Child Object" to "Parent Object"
+			only, which are Associated with "Master-Detail Relation".
+			
+	Limitations:
+		1. Cross-Object Field Update won't support to Update the Fields
+			from "Parent Object To Child Object".
+			
+		2. Cross-Object Field Updates will not Support, if the Objects are
+			associated with "Lookup Relationship".
+			
+UseCase:
+========
+	Configure a Workflow Rule on the Opportunity Object, to Synchronize the Opportunity Stage Field value into the Parent Account Record's Description field.
+	
+		Object Name : Opportunity Object.
+		Event / Evaluation Criteria : Created, and EveryTime it is Edited.
+			Rule Conditions: 
+					Opportunity:StageName != Null
+		Action Type : Immediate Action.
+			Action Name : Field Update.
+				Field To Update: Account:Description.
+				Assign the New Value : 
+							Text(StageName).
+							
+Assign a Task:
+==============
+By using this Action, we can assign a Task record to the required user with the required Subject, Description, Status, Priority, and Due Date. Which reminds the people with the pop-up alerts.
+
+Note: We can see all the Assigned Tasks inside the "Home Tab", in "Today's
+	Tasks" component.
+	
+UseCase:
+========
+	Configure a Workflow Rule on the Hiring Manager Object, to Assign a New Task to the Administrator to allocate the required System Resources to the HR Person, upon Creating a "New HR Manager Record".
+	
+	Object Name : Hiring Manager:
+	Event / Evaluation Criteria : Created.
+		Rule Condition:
+				HiringManager:Designation == 'HR Manager'
+	Action Type : Immediate Action.
+		Action Name : Assign a Task.
+			Assigned to : Training Batch User.
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Limitations:
+------------
+
+Process Builder:
+----------------
+
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	Travel : Hyderabad ----> Bangalore. 
+	
+		Reserve a Bus Ticket:
+				
+			Ticket Reserved ----> Immediately ---> SMS, Email.
+			Sunday Evening @ 10.00 PM IST.
+			Boarding Point : Ameerpet.
+			
+			6 Hours Before Travel (4.00 PM) ----> SMS, Email. 
+									(Bus Number, Driver Contact Number)
+			4 Hours Before Travel (6.00 PM) ----> SMS, Email (Tracking Link)
+			30 Minutes Before the Travel (9.30 PM) ---> SMS, Email 
+			10.00 PM ----> Email, SMS ----> Thanks for using Service.
+			6.00 AM ----> Reached to Bangalore.
+			After 2 Hours of Travel ----> SMS, Email ----> Feedback.
+			
+			
+			
+			
+			
+	
